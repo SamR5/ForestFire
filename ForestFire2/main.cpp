@@ -1,10 +1,11 @@
-/* Includes */
+/*
 
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
+Forest fire simulation with only a line of fire at the bottom
+
+*/
+
+#include <GL/gl.h>
 #include <GL/glut.h>
-#endif
 
 #include <iostream>
 #include <ctime>
@@ -32,7 +33,6 @@
 #define CELL_SIZE 2
 #define FPS 30
 
-/* Declarations */
 
 void timer_callback(int);
 void display_callback();
@@ -188,21 +188,17 @@ void next_step() {
 }
 
 void init() {
+    glClearColor(colors[EMPTY][0], colors[EMPTY][1], colors[EMPTY][2], 0.0f);
     init_grid();
     init_neighbors(MOORE);
 }
 
 void display_callback() {
     auto start(std::chrono::steady_clock::now());
-
-    glClearColor (1.0f, 1.0f, 1.0f, 0.0f); // white
-    glClear (GL_COLOR_BUFFER_BIT);
-
-    next_step();
-    glClearColor(colors[EMPTY][0], colors[EMPTY][1], colors[EMPTY][2], 0.0f);
+    
+    
     glClear (GL_COLOR_BUFFER_BIT);
     draw_grid();
-    glFlush();
 
     glutSwapBuffers();
 
@@ -218,6 +214,7 @@ void reshape_callback(int width, int height) {
 }
 
 void timer_callback(int) {
+    next_step();
     glutPostRedisplay(); // run the display_callback function
     glutTimerFunc(1000.0/FPS, timer_callback, 0);
 }
@@ -228,7 +225,7 @@ int main(int argc, char **argv)
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowPosition(15, 15); // optional
     glutInitWindowSize(COLUMNS*CELL_SIZE, ROWS*CELL_SIZE);
-    glutCreateWindow("Project Name");
+    glutCreateWindow("Forest Fire simulation");
     glutDisplayFunc(display_callback);
     glutReshapeFunc(reshape_callback);
     glutTimerFunc(1000/FPS, timer_callback, 0);
