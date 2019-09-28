@@ -1,13 +1,13 @@
-/**************************
- * Includes
- *
- **************************/
+/*
 
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
+Forest fire simulation
+
+*/
+
+
+#include <GL/gl.h>
 #include <GL/glut.h>
-#endif
+
 
 #include <iostream>
 #include <ctime>
@@ -35,11 +35,6 @@
 #define CELL_SIZE 2
 #define FPS 30
 
-/**************************
- * Global Variables
- *
-***************************/
-
 int ** grid = nullptr;
 int neighborsAmount;
 std::vector<std::vector<int>> neighbors;
@@ -60,10 +55,6 @@ float colors[3][3] = {{1.0f, 1.0f, 1.0f}, // white
 float scaleR(2.0f / ROWS);
 float scaleC(2.0f / COLUMNS);
 
-/**************************
- * Main Functions
- *
- **************************/
 
 std::vector<float> orth_coordinates(int row, int col) {
     std::vector<float> res;
@@ -71,10 +62,7 @@ std::vector<float> orth_coordinates(int row, int col) {
     float newY(ROWS - row);
     newX *= 2.0 / COLUMNS;
     newY *= 2.0 / ROWS;
-    //return {newX-1, newY-1};
-    res.push_back(newX-1);
-    res.push_back(newY-1);
-    return res;
+    return {newX-1, newY-1};
 }
 
 void write() {
@@ -120,11 +108,6 @@ void draw_grid() {
         }
     }
 }
-
-/**************************
- * ForestFire Functions
- *
- **************************/
 
 void init_grid() {
     grid = new int * [ROWS];
@@ -203,16 +186,14 @@ void next_step() {
 }
 
 void init() {
+    glClearColor(colors[EMPTY][0], colors[EMPTY][1], colors[EMPTY][2], 0.0f);
     init_grid();
     init_neighbors(MOORE);
 }
 
 void display_callback() {
     auto start(std::chrono::steady_clock::now());
-
-    next_step();
-
-    glClearColor(colors[EMPTY][0], colors[EMPTY][1], colors[EMPTY][2], 0.0f);
+    
     glClear (GL_COLOR_BUFFER_BIT);
 
     draw_grid();
@@ -232,12 +213,12 @@ void reshape_callback(int width, int height) {
 }
 
 void timer_callback(int) {
+    next_step();
     glutPostRedisplay(); // run the display_callback function
     glutTimerFunc(1000.0/FPS, timer_callback, 0);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     glutInit(&argc, argv); // initialize
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowPosition(15, 15); // optional
