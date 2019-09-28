@@ -6,15 +6,6 @@ There are two types of neighborhood where the fire propagates:
   - the VON NEUMANN : North, East, South and West
   - the MOORE neighbors : N, NE, E, SE, S, SW, W and NW
 
-________________  
-| NW | N  | NE |  
-|----+----+----|  
-| W  |FIRE| E  |  
-|----+----+----|  
-| SW | S  | SE |  
-________________  
-
-
 Each scripts has its specificity.
 
 ForestFire(simulation):  
