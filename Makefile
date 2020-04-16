@@ -1,16 +1,16 @@
-all: ForestFire ForestFire2 ForestFire(simulation) ForestFireHexa ForestFireTri
+all: ff ff2 ffSim ffHexa ffTri
 
-ForestFire:
-	g++ main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o ForestFire1
+ff:
+	g++ ForestFire/main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o Forest_fire_1
 
-ForestFire2:
-	g++ main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o ForestFire2
+ff2:
+	g++ ForestFire2/main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o Forest_fire_2
 
-ForestFire(simulation):
-	g++ main.cpp -std=c++11 -O3 -o ForestFireSimulation
+ffSim:
+	g++ ForestFire\(simulation\)/main.cpp -std=c++11 -O3 -o Forest_fire_simulation
 
-ForestFireHexa:
-	g++ main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o HexagonalForestFire
+ffHexa:
+	g++ ForestFireHexa/main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o Forest_fire_hexa
 
-ForestFireTri:
-	g++ main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o TriangularForestFire
+ffTri:
+	g++ ForestFireTri/main.cpp -std=c++11 -lGL -lGLU -lglut -O3 -no-pie -o Forest_fire_tri

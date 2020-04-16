@@ -6,7 +6,8 @@ There are two types of neighborhood where the fire propagates:
   - the VON NEUMANN : North, East, South and West
   - the MOORE neighbors : N, NE, E, SE, S, SW, W and NW
 
-Each scripts has its specificity.
+Each scripts has its specificity.  
+Use `make all` to generate the executables
 
 ## ForestFire(simulation):  
   - A rectangular grid filled with random trees (according to density) and a fire on the middle.  
